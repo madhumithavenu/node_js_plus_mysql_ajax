@@ -43,32 +43,32 @@ module.exports.deleteStudent = (req, res) => {
     });
 };
 
-// module.exports.updateStudent = (req, res) => {
-//     let sql = "SELECT * FROM STUDENTS WHERE ID=?";
+module.exports.updateStudent = (req, res) => {
+    let id = req.query.id;
+    let sql = "SELECT * FROM STUDENTS WHERE ID=?";
 
-//     let id = req.query.id;
-//     connection.query(sql, [id], (err, result) => {
-//         if (err) return console.log(err);
+    connection.query(sql, [id], (err, result) => {
+        if (err) return console.log(err);
 
-//         res.render("update-student", { student: result });
-//     });
-// };
+        res.render("update-student", { student: result });
+    });
+};
 
-// module.exports.updateStudentDetails = (req, res) => {
+module.exports.updateStudentDetails = (req, res) => {
 
-//     let name = req.body.name;
-//     let email = req.body.email;
-//     let mobile = req.body.mobile;
-//     let id = req.body.id;
+    let name = req.body.name;
+    let email = req.body.email;
+    let mobile = req.body.mobile;
+    let id = req.body.id;
 
-//     let sql = "UPDATE STUDENTS SET NAME=?, EMAIL=?, MOBILE=? WHERE ID=?";
+    let sql = "UPDATE STUDENTS SET NAME=?, EMAIL=?, MOBILE=? WHERE ID=?";
 
-//     connection.query(sql, [name, email, mobile, id], (err, result) => {
-//         if (err) return console.log(err);
+    connection.query(sql, [name, email, mobile, id], (err, result) => {
+        if (err) return console.log(err);
 
-//         res.redirect('student');
-//     });
-// };
+        res.send('Student Record Updated');
+    });
+};
 
 // module.exports.searchStudents= (req, res)=>{
 //     let sql = "SELECT * FROM STUDENTS";
