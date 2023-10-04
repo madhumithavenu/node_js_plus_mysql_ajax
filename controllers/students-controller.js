@@ -21,27 +21,27 @@ module.exports.insertValues = (req, res) => {
     });
 }
 
-// module.exports.getStudent = (req, res) => {
-//     let sql = "SELECT * FROM STUDENTS";
+module.exports.getStudent = (req, res) => {
+    let sql = "SELECT * FROM STUDENTS";
 
-//     connection.query(sql, (err, result) => {
-//         if (err) return console.log(err);
+    connection.query(sql, (err, result) => {
+        if (err) return console.log(err);
 
-//         res.render("students", { students: result });
-//         // res.render('students');
-//     });
-// };
+        res.render("students", { students: result });
+        // res.render('students');
+    });
+};
 
-// module.exports.deleteStudent = (req, res) => {
-//     let sql = "DELETE FROM STUDENTS WHERE ID=?";
+module.exports.deleteStudent = (req, res) => {
+    let sql = "DELETE FROM STUDENTS WHERE ID=?";
 
-//     let id = req.query.id;
-//     connection.query(sql, [id], (err, result) => {
-//         if (err) return console.log(err);
+    let id = req.query.id;
+    connection.query(sql, [id], (err, result) => {
+        if (err) return console.log(err);
 
-//         res.redirect("student");
-//     });
-// };
+        res.send("Record Deleted");
+    });
+};
 
 // module.exports.updateStudent = (req, res) => {
 //     let sql = "SELECT * FROM STUDENTS WHERE ID=?";
