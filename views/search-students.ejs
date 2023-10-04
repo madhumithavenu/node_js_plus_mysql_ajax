@@ -9,11 +9,11 @@
 
 <body>
     <h1>Search Here</h1>
-    <form action="/search">
-        <input type="search" name="name" placeholder="Search Name">
-        <input type="search" name="email" placeholder="Search Email">
-        <input type="search" name="mobile" placeholder="Search Mobile">
-        <input type="Submit" value="Search">
+    <form onsubmit="return searchForm()">
+        <input type="search" name="name" placeholder="Search Name" id="name" onkeyup="searchForm()">
+        <input type="search" name="email" placeholder="Search Email" id="email" onkeyup="searchForm()">
+        <input type="search" name="mobile" placeholder="Search Mobile" id="mobile" onkeyup="searchForm()">
+        <input type="submit" value="Search">
     </form>
     <h1>Students List</h1>
     <table border="2" width="100%">
@@ -44,5 +44,38 @@
         
     </table>
 </body>
+<script>
+    searchForm = () => {
+        document.querySelectorAll(".tr").forEach((ele)=>{
+            ele.remove();
+        });
+
+        let table = document.getElementsByTagName("table")[0];
+
+        let name = document.getElementsById('name').value;
+        let email = document.getElementsById('email').value;
+        let mobile = document.getElementsById('mobile').value;
+
+        let req = new XMLHttpRequest();
+        req.open("GET", "/search?name=" + name + "&email=" + email + "&mobile=" + mobile);
+        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // req.send("name=" + name.value + "&email=" + email.value + "&mobile=" + mobile.value + "&id=" + id.value);
+        req.send();
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+                let obj = JSON.parse(req.responseText);
+                if(obj.length > 0) {
+                    for(let i=0; i< obj.length; i++){
+                        table.innerHTML += "<tr class='tr'><td>"+(i+1)+"</td><td>"+obj[i]['name']+"</td><td>"+obj[i]['email']+"</td><td>"+obj[i]['mobile']+"</td></tr>";
+                    }
+                }else{
+                    table.innerHTML += "<tr class='tr'><td colspan='5'>Data NOT found </td></tr>";
+                }
+            }
+        }
+        return false;
+    }
+
+</script>
 
 </html>
