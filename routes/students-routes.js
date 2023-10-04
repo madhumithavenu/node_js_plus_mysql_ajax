@@ -3,7 +3,6 @@ const express = require("express");
 const { homePage, insertValues, getStudent, deleteStudent, updateStudent, updateStudentDetails, searchStudents, searchStudentsDetails} = require("../controllers/students-controller.js");
 
 const studentRouter = express.Router();
-
 studentRouter.get("/", homePage);
 studentRouter.post("/", insertValues);
 studentRouter.get("/student", getStudent);
